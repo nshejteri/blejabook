@@ -36,6 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main_app',
+    'userprofile',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -72,12 +74,26 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
+
+DATE_FORMAT = 'd m Y'
+
+DATE_INPUT_FORMATS = ('%d/%m/%Y', '%Y-%m-%d',)
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+TEMPLATE_MAIN_PATH = os.path.join(BASE_DIR, 'main_app/templates')
+TEMPLATE_PROFILE_PATH = os.path.join(BASE_DIR, 'userprofile/templates')
+
+TEMPLATE_DIRS = [
+    TEMPLATE_MAIN_PATH,
+    TEMPLATE_PROFILE_PATH,
+]
+
+AUTH_PROFILE_MODULE = 'userprofile.UserProfile'
