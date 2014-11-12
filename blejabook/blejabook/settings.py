@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'main_app',
     'userprofile',
+    'userauth',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -90,10 +91,12 @@ STATIC_URL = '/static/'
 
 TEMPLATE_MAIN_PATH = os.path.join(BASE_DIR, 'main_app/templates')
 TEMPLATE_PROFILE_PATH = os.path.join(BASE_DIR, 'userprofile/templates')
+TEMPLATE_AUTH_PATH = os.path.join(BASE_DIR, 'userauth/templates')
 
 TEMPLATE_DIRS = [
     TEMPLATE_MAIN_PATH,
     TEMPLATE_PROFILE_PATH,
+    TEMPLATE_AUTH_PATH,
 ]
 
 AUTH_PROFILE_MODULE = 'userprofile.UserProfile'
