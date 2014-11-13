@@ -2,6 +2,7 @@ from django.shortcuts import render
 from userauth.forms import MyUserForm, UserProfileForm
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -23,7 +24,7 @@ def signup(request):
 		user_form = MyUserForm()
 		user_profile_form = UserProfileForm()
 
-	return render(request, '/account/signup.html', {'user_form':user_form, 'user_profile_form': user_profile_form})
+	return render(request, 'account/signup.html', {'user_form':user_form, 'user_profile_form': user_profile_form})
 
 def user_login(request):
 	if request.method=='POST':
@@ -34,7 +35,7 @@ def user_login(request):
 		if user:
 			if user.is_active:
 				auth.login(request, user)
-				return HttpResponseRedirect('/admin/')
+				return HttpResponseRedirect('/')
 			else:
 				return HttpResponse('jok')
 		else:
@@ -42,6 +43,11 @@ def user_login(request):
 			return HttpResponse('invalid login details supplied')
 	else:
 		return render(request,'account/login.html/',{})
+
+@login_required
+def user_logout(request):
+	auth.logout(request)
+	return HttpResponseRedirect('/account/login/')
 
 
 
