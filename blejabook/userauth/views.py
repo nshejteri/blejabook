@@ -5,6 +5,7 @@ from userauth.forms import MyUserForm, UserProfileForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from userprofile.models import UserProfile
 
 # Create your views here.
@@ -21,6 +22,7 @@ def signup(request):
 			profile.confirmation_key = hashlib.sha1(user.email + str(datetime.datetime.now())).hexdigest()
 			profile.user = user
 			profile.save()
+			messages.add_message(request, messages.INFO, 'Aktivacioni link je poslat na Vasu email adresu.')
 			UserProfile.emailCM.send_confirmation(request, user)
 		else:
 			print user_form.errors, user_profile_form.errors

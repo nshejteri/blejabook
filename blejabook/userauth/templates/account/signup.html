@@ -6,6 +6,13 @@
 </head>
 <body>
 	<h1>Sign Up!</h1>
+	{% if messages %}
+		<ul class="messages">
+	    	{% for message in messages %}
+	    		<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	    	{% endfor %}
+		</ul>
+	{% endif %}
 	<form id="" method="post" action="/account/signup/">
 		{% csrf_token %}
 		{{ user_form.as_p }}
