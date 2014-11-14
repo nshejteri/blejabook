@@ -21,7 +21,7 @@ def signup(request):
 			profile.confirmation_key = hashlib.sha1(user.email + str(datetime.datetime.now())).hexdigest()
 			profile.user = user
 			profile.save()
-			UserProfile.emailCM.send_confirmation(request, user)
+			UserProfile.objects.send_confirmation(request, user)
 		else:
 			print user_form.errors, user_profile_form.errors
 
@@ -56,7 +56,7 @@ def user_logout(request):
 
 def confirm_email(request, confirmation_key):
 
-	UserProfile.emailCM.confirm_email(confirmation_key)
+	UserProfile.objects.confirm_email(confirmation_key)
 	return render(request, 'account/confirmation_completed.html', {})
 
 

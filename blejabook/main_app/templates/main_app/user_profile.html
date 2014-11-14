@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Profil</title>
+</head>
+<body>
+	<h2>Profil {{user_profile.user}}</h2>
+	<p>Sex 
+	{%if user_profile.gender == 'm'%}
+		male
+	{% else %}
+		female
+	{% endif %}
+	</p>
+	<p>Date_of_birth {{user_profile.date_of_birth}}</p>
+	<p>State {{user_profile.country}}</p>
+	<p>City {{user_profile.city}}</p>
+
+	{% if permision %}
+		<a href="">edit Profil</a>
+	{% endif %}
+
+
+	
+</body>
+</html>
