@@ -10,10 +10,10 @@ from django.utils.translation import ugettext_lazy as _
 class MyUserForm(UserCreationForm):
 	def __init__(self, *args, **kw):
 		super(UserCreationForm, self).__init__(*args, **kw)
-		self.fields['username'].widget.attrs['placeholder']='Username'
-		self.fields['username'].widget.attrs['autofocus']='autofocus'
-		self.fields['password1'].widget.attrs['placeholder']='Password'
-		self.fields['password2'].widget.attrs['placeholder']='Password confirmation'
+		self.fields['username'].widget.attrs['placeholder'] = 'Username'
+		self.fields['username'].widget.attrs['autofocus'] = 'autofocus'
+		self.fields['password1'].widget.attrs['placeholder'] = 'Password'
+		self.fields['password2'].widget.attrs['placeholder'] = 'Password confirmation'
 
 	email = forms.EmailField(label=_('Email'), required=True, widget=forms.TextInput(attrs={'placeholder': 'Email', 'autofocus': 'autofocus'}))
 

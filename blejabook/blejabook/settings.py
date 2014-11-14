@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'main_app',
     'userprofile',
     'userauth',
@@ -99,4 +100,16 @@ TEMPLATE_DIRS = [
     TEMPLATE_AUTH_PATH,
 ]
 
-AUTH_PROFILE_MODULE = 'userprofile.UserProfile'
+#AUTH_PROFILE_MODULE = 'userprofile.UserProfile'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'username'
+EMAIL_HOST_PASSWORD = 'password'
+EMAIL_PORT = 587
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+DEFAULT_FROM_EMAIL = 'karrapandza@gmail.com'
+DEFAULT_HTTP_PROTOCOL = 'http'
+
+SITE_ID = 1
