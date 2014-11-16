@@ -114,4 +114,4 @@ DEFAULT_HTTP_PROTOCOL = 'http'
 
 SITE_ID = 1
 
-PERMISION = False
+LOGIN_URL = '/account/login/'
