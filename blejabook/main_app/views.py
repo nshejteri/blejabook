@@ -19,14 +19,12 @@ def get_user(username):
 	user_profile = UserProfile.objects.get(user=user)
 	return user_profile
 
-
 def index(request):
 
 	if request.user.is_authenticated():
 		return render(request,'main_app/index.html', {})
 	else:
 		return HttpResponseRedirect("/account/login/")
-
 
 @permision
 def user_profile(request, username, permission=False):

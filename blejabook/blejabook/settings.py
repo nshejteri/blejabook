@@ -118,3 +118,5 @@ DEFAULT_FROM_EMAIL = 'karrapandza@gmail.com'
 DEFAULT_HTTP_PROTOCOL = 'http'
 
 SITE_ID = 1
+
+LOGIN_URL = '/account/login/'
