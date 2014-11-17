@@ -19,11 +19,7 @@ class MyUserForm(UserCreationForm):
 		self.fields['username'].widget.attrs['placeholder'] = 'Username'
 		self.fields['username'].widget.attrs['autofocus'] = 'autofocus'
 		self.fields['password1'].widget.attrs['placeholder'] = 'Password'
-<<<<<<< HEAD
-		
-=======
 		self.fields.pop('password2')
->>>>>>> 5979a120d68a1476f4edf84ec79bb6f2e57f6db7
 
 	email = forms.EmailField(label=_('Email'), required=True, widget=forms.TextInput(attrs={'placeholder': 'Email', 'autofocus': 'autofocus'}))
 	email2 = forms.EmailField(label=_('Email confirmation'), required=True, widget=forms.TextInput(attrs={'placeholder': 'Email Confirmation', 'autofocus': 'autofocus'}))
@@ -32,11 +28,7 @@ class MyUserForm(UserCreationForm):
 		'duplicate_username': _("A user with that username already exists."),
 		'password_mismatch': _("The two password fields didn't match."),
 		'email_mismatch': _("The two email fields didn't match."),
-<<<<<<< HEAD
-    }
-=======
 	}
->>>>>>> 5979a120d68a1476f4edf84ec79bb6f2e57f6db7
 
 	class Meta:
 		model = User
@@ -45,16 +37,6 @@ class MyUserForm(UserCreationForm):
 	def clean_email2(self):
 		email = self.cleaned_data['email']
 		email2 = self.cleaned_data['email2']
-<<<<<<< HEAD
-
-		if email and email2 and email != email2:
-			raise forms.ValidationError(
-				self.error_messages['email_mismatch'],
-				code='email_mismatch',
-			)		
-		return email2
-=======
->>>>>>> 5979a120d68a1476f4edf84ec79bb6f2e57f6db7
 
 		if email and email2 and email != email2:
 			raise forms.ValidationError(
