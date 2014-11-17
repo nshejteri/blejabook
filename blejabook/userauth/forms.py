@@ -10,20 +10,35 @@ from django.utils.translation import ugettext_lazy as _
 class MyUserForm(UserCreationForm):
 	def __init__(self, *args, **kw):
 		super(UserCreationForm, self).__init__(*args, **kw)
+		self.fields.pop('password2')
 		self.fields['username'].widget.attrs['placeholder'] = 'Username'
 		self.fields['username'].widget.attrs['autofocus'] = 'autofocus'
 		self.fields['password1'].widget.attrs['placeholder'] = 'Password'
-		self.fields['password2'].widget.attrs['placeholder'] = 'Password confirmation'
+		
 
 	email = forms.EmailField(label=_('Email'), required=True, widget=forms.TextInput(attrs={'placeholder': 'Email', 'autofocus': 'autofocus'}))
+	email2 = forms.EmailField(label=_('Email confirmation'), required=True, widget=forms.TextInput(attrs={'placeholder': 'Email Confirmation', 'autofocus': 'autofocus'}))
+
+	error_messages = {
+		'duplicate_username': _("A user with that username already exists."),
+		'password_mismatch': _("The two password fields didn't match."),
+		'email_mismatch': _("The two email fields didn't match."),
+    }
 
 	class Meta:
 		model = User
-		fields = ('username', 'email', 'password1', 'password2')
+		fields = ('username', 'email', 'email2')
 
-	def clean_email(self):
- 		email = self.cleaned_data['email']
- 		return email
+	def clean_email2(self):
+		email = self.cleaned_data['email']
+		email2 = self.cleaned_data['email2']
+
+		if email and email2 and email != email2:
+			raise forms.ValidationError(
+				self.error_messages['email_mismatch'],
+				code='email_mismatch',
+			)		
+		return email2
 
 class UserProfileForm(forms.ModelForm):
 
