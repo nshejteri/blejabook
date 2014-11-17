@@ -5,6 +5,7 @@ from userauth.forms import MyUserForm, UserProfileForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from userprofile.models import UserProfile
 
 # Create your views here.
@@ -21,7 +22,11 @@ def signup(request):
 			profile.confirmation_key = hashlib.sha1(user.email + str(datetime.datetime.now())).hexdigest()
 			profile.user = user
 			profile.save()
+			messages.add_message(request, messages.INFO, 'Prvi korak registracije je ispunjen. Da biste zavrsili registraciju morate aktivirati nalog sa aktivacionim linkom koji je poslat na Vasu email adresu.')
 			UserProfile.objects.send_confirmation(request, user)
+
+			user_form = MyUserForm() # Cisti formu nakon uspesnog registrovanja
+			user_profile_form = UserProfileForm() # Cisti formu nakon uspesnog registrovanja
 		else:
 			print user_form.errors, user_profile_form.errors
 

@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
@@ -22,5 +23,10 @@ class Migration(migrations.Migration):
             name='verified',
             field=models.BooleanField(default=False),
             preserve_default=True,
+        ),
+        migrations.AlterField(
+            model_name='userprofile',
+            name='user',
+            field=models.OneToOneField(related_name=b'profile', to=settings.AUTH_USER_MODEL),
         ),
     ]
