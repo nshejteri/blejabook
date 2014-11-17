@@ -22,8 +22,11 @@ def signup(request):
 			profile.confirmation_key = hashlib.sha1(user.email + str(datetime.datetime.now())).hexdigest()
 			profile.user = user
 			profile.save()
-			messages.add_message(request, messages.INFO, 'Aktivacioni link je poslat na Vasu email adresu.')
-			UserProfile.emailCM.send_confirmation(request, user)
+			messages.add_message(request, messages.INFO, 'Prvi korak registracije je ispunjen. Da biste zavrsili registraciju morate aktivirati nalog sa aktivacionim linkom koji je poslat na Vasu email adresu.')
+			UserProfile.objects.send_confirmation(request, user)
+
+			user_form = MyUserForm() # Cisti formu nakon uspesnog registrovanja
+			user_profile_form = UserProfileForm() # Cisti formu nakon uspesnog registrovanja
 		else:
 			print user_form.errors, user_profile_form.errors
 
@@ -58,7 +61,7 @@ def user_logout(request):
 
 def confirm_email(request, confirmation_key):
 
-	UserProfile.emailCM.confirm_email(confirmation_key)
+	UserProfile.objects.confirm_email(confirmation_key)
 	return render(request, 'account/confirmation_completed.html', {})
 
 
