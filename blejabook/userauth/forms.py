@@ -57,7 +57,6 @@ class UserProfileForm(forms.ModelForm):
 		model = UserProfile
 		fields = ('gender', 'date_of_birth', 'country', 'city')
 
-	
    
 
    
