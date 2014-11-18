@@ -47,15 +47,15 @@ class MyUserForm(UserCreationForm):
 
 class UserProfileForm(forms.ModelForm):
 
-	#gender = ChoiceField(GENDER_CHOICES, label='Gender', required=True)
+	name = forms.CharField(max_length=40, label='Name', widget=forms.TextInput(attrs={'placeholder': 'Name', 'autofocus': 'autofocus'}))
 	gender = forms.CharField(widget=forms.RadioSelect(choices=GENDER_CHOICES))
-	date_of_birth = forms.DateField(required=True, widget=SelectDateWidget(years=range(1950, datetime.date.today().year)))
+	date_of_birth = forms.DateField(widget=SelectDateWidget(years=range(1950, datetime.date.today().year)))
 	country = forms.CharField(max_length=30, label='Country', widget=forms.TextInput(attrs={'placeholder': 'Country', 'autofocus': 'autofocus'}))
 	city = forms.CharField(max_length=30, label='City', widget=forms.TextInput(attrs={'placeholder': 'City', 'autofocus': 'autofocus'}))
 	
 	class Meta:
 		model = UserProfile
-		fields = ('gender', 'date_of_birth', 'country', 'city')
+		fields = ('name', 'gender', 'date_of_birth', 'country', 'city')
 
    
 

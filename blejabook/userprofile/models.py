@@ -49,6 +49,7 @@ class EmailConfirmationManager(models.Manager):
 class UserProfile(models.Model):
 
 	user = models.OneToOneField(User, related_name='profile')
+	name = models.CharField('First-Last Name', max_length=40, default='')
 	date_of_birth = models.DateField('Date of birth', default=datetime(1900, 01, 01, 0, 0))
 	gender = models.CharField(max_length=1, choices=(('m', 'Male'), ('f', 'Female')))
 	country = models.CharField(max_length=30)
