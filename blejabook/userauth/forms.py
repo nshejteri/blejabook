@@ -15,7 +15,6 @@ GENDER_CHOICES = (
 class MyUserForm(UserCreationForm):
 	def __init__(self, *args, **kw):
 		super(UserCreationForm, self).__init__(*args, **kw)
-		self.fields.pop('password2')
 		self.fields['username'].widget.attrs['placeholder'] = 'Username'
 		self.fields['username'].widget.attrs['autofocus'] = 'autofocus'
 		self.fields['password1'].widget.attrs['placeholder'] = 'Password'

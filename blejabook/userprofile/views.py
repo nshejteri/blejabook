@@ -16,20 +16,28 @@ def profile_permission(func):
 	return wraper
 
 	
-def get_user_profile(username):
+def get_profile(username):
 
 	user = User.objects.get(username=username)
 	return  user.profile
 
+
 def get_model_fields(model):
-    return model._meta.fields
+	return model._meta.fields
+
+
+def get_profil_owner(username):
+
+	return User.objects.get(username=username)
+
 
 @profile_permission
 def user_profile(request, username, permission=False):
 
-	user_profile = get_user_profile(username)
-	context = { 'permision': permission, 'user_profile': user_profile }
-	return render(request, 'userprofile/user_profile.html', context)
+	profil_owner = get_profil_owner(username)
+	profile = get_profile(username)
+	context = { 'permision': permission, 'profile': profile, 'profil_owner': profil_owner }
+	return render(request, 'userprofile/profile.html', context)
 
 
 @profile_permission
@@ -38,13 +46,13 @@ def edit_profile(request, username, permission=False):
 	if permission == False:
 		return HttpResponse('kurcina')
 	else:
-		user_profile = get_user_profile(username)
+		profile = get_profile(username)
 		if request.method=='POST':
-			form = UserProfileForm(request.POST, instance = user_profile)
+			form = UserProfileForm(request.POST, instance = profile)
 			if form.is_valid():
 				form.save()
 				return HttpResponseRedirect('.')
 		else:
-			form = UserProfileForm(instance = user_profile)
+			form = UserProfileForm(instance = profile)
 
 	return render(request, 'userprofile/edit_profile.html', { 'form': form} )

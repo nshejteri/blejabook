@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Profil</title>
+</head>
+<body>
+	<h2>Profil {{ profil_owner.username }}</h2>
+	<p>Name: {{ profil_owner.first_name }}</p>
+	<p>Email: {{profil_owner.email}}</p>
+	
+	<h2>licni podaci</h2>
+	<p>Sex 
+	{%if profile.gender == 'm'%}
+		male
+	{% else %}
+		female
+	{% endif %}
+	</p>
+	<p>Date_of_birth {{profile.date_of_birth}}</p>
+	<p>State {{profile.country}}</p>
+	<p>City {{profile.city}}</p>
+
+	{% if permision %}
+		<a href="{% url 'edit_profile' user.username %}">edit Profil</a>
+	{% endif %}
+
+
+
+	
+</body>
+</html>
