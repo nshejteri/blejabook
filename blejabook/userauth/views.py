@@ -7,6 +7,7 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from userprofile.models import UserProfile
+from django.contrib.auth.forms import PasswordResetForm
 
 # Create your views here.
 
