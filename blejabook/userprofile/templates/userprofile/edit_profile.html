@@ -3,7 +3,7 @@
 {% block title %} Edit profile {% endblock %}
 
 {% block content %}
-	<form action="{% url 'edit_profile' user.username %}" method="POST">
+	<form id='update_profile_frm' action="{% url 'edit_profile' user.username %}" method="POST">
 		{% csrf_token %}
 		{{form.as_p}}
 		<input type="submit" value="Update form">
