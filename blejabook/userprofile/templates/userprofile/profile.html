@@ -1,33 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Profil</title>
-</head>
-<body>
-	<h2>Profil {{ user.username }}</h2>
-	<p>Username: {{ user.username }}</p>
-	<p>Email: {{ user.email }}</p>
-	
-	<h2>Licni podaci</h2>
-	<p>Name {{ user.profile.name }}</p>
-	<p>Sex 
-	{% if profile.gender == 'm' %}
-		male
-	{% else %}
-		female
-	{% endif %}
-	</p>
-	<p>Date_of_birth {{ user.profile.date_of_birth }}</p>
-	<p>State {{ user.profile.country }}</p>
-	<p>City {{ user.profile.city }}</p>
+{% extends 'base.html' %}
 
-	{% if permision %}
-		<a href="{% url 'edit_profile' user.username %}">edit Profil</a>
-	{% endif %}
+{% block title %} Profile {% endblock %}
 
-
-
-	
-</body>
-</html>
+{% block content %}
+	<div id='profile'>
+		<h2>Profil <span id='username'>{{ profil_owner.username }}</span></h2>
+		<p>Username: {{ profil_owner.username }}</p>
+		<p>Email: {{ profil_owner.email }}</p>
+		
+		<h2>Licni podaci</h2>
+		<p>Name {{ profile.name }}</p>
+		<p>Sex 
+		{% if profile.gender == 'm' %}
+			Male
+		{% else %}
+			Female
+		{% endif %}
+		</p>
+		<p>Date_of_birth {{ profile.date_of_birth }}</p>
+		<p>State {{ profile.country }}</p>
+		<p>City {{ profile.city }}</p>
+		{% if permision %}
+			<button id="edit_profile_btn">Edit profile</button>
+		{% endif %}
+	</div>
+{% endblock %}

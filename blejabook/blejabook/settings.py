@@ -92,8 +92,24 @@ DATE_INPUT_FORMATS = ('%d/%m/%Y', '%Y-%m-%d',)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
+"""
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, "media/static")
+
+STATIC_PATH = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+    STATIC_PATH,    
+)"""
+
+
+STATIC_ROOT = 'staticfiles'
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    ('assets', os.path.join(BASE_DIR, "static")),
+)
 
 TEMPLATE_MAIN_PATH = os.path.join(BASE_DIR, 'main_app/templates')
 TEMPLATE_PROFILE_PATH = os.path.join(BASE_DIR, 'userprofile/templates')
@@ -109,8 +125,8 @@ TEMPLATE_DIRS = [
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'karrapandza'
-EMAIL_HOST_PASSWORD = 'sop_810630'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 

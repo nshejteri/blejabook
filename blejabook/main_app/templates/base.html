@@ -1,7 +1,12 @@
+{% load staticfiles %}
+{% load i18n %}
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>{% block title %}Date Site{% endblock %}</title>
+		<script type='text/javascript' src="{% static 'assets/js/jquery.js' %}"></script>
+		<script type='text/javascript' src="{% static 'assets/js/default.js' %}"></script>
 	</head>
 
 	<body>

@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %} Edit profile {% endblock %}
+
+{% block content %}
 	<form action="{% url 'edit_profile' user.username %}" method="POST">
 		{% csrf_token %}
 		{{form.as_p}}
 		<input type="submit" value="Update form">
 	</form>
-</body>
-</html>
+{% endblock %}
