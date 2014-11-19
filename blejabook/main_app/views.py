@@ -22,7 +22,7 @@ def get_user(username):
 def index(request):
 
 	if request.user.is_authenticated():
-		return render(request,'main_app/index.html', {})
+		return render(request,'main_app/home.html', {})
 	else:
 		return HttpResponseRedirect("/account/login/")
 

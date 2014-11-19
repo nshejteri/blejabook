@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	$('#edit_profile_btn').click(function(){
+	$('#edit_profile_btn').click(function() {
 
 		var username = $('#username').text();
 		var url_destination = '/accounts/edit_profile/' + username + '/'

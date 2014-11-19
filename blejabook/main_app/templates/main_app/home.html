@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans Home %}{% endblock %}
+
+{% block content %}
+	<body>
+		<ul>
+			<li><a href="{% url 'user_logout' %}">Logout</a></li>
+			<li><a href="{% url 'user_profile' user.username %}">Profil</a></li>
+			<li><a href="">Svi korisnici</a></li>
+		</ul>
+	</body>
+{% endblock %}
