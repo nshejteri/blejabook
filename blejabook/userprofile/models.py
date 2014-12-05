@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.core.cache import cache
 
 # Create your models here.
 class EmailConfirmationManager(models.Manager):
@@ -60,5 +61,17 @@ class UserProfile(models.Model):
 	User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
 
 	objects = EmailConfirmationManager()
+
+	def online(self):
+		"""
+		Funkcija vraca 'True' ako je korisnik online u suprotnom vraca 'None'.
+		"""
+		return cache.get('online-%s' % self.user.id)
+
+	def num_of_online(self):
+		"""
+		Funkcija vraca broj online korisnika.
+		"""
+		return len(cache.get('online_now'))
 
 

@@ -50,11 +50,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'userprofile.onlineusers.OnlineNowUsersMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.request', 
 )
 
 ROOT_URLCONF = 'blejabook.urls'
@@ -136,3 +138,7 @@ DEFAULT_HTTP_PROTOCOL = 'http'
 SITE_ID = 1
 
 LOGIN_URL = '/account/login/'
+
+# Interval od 20min za koji se korisnik smatra 'Online'. Ako se zakomentarise ova konstanta
+# default vrednost je 15min
+#ONLINE_TIMEOUT = 60 * 20

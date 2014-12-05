@@ -1,6 +1,6 @@
 import datetime
 import hashlib
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from userauth.forms import MyUserForm, UserProfileForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import auth
@@ -58,7 +58,9 @@ def user_login(request):
 @login_required
 def user_logout(request):
 	auth.logout(request)
-	return HttpResponseRedirect('/account/login/')
+	#return HttpResponseRedirect('/account/login/')
+	#return render(request, 'index.html', {})
+	return redirect('index')
 
 def confirm_email(request, confirmation_key):
 

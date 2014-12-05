@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load date_site_custom_tags %}
+
+{% block title %} All users {% endblock %}
+
+{% block content %}
+<div class="all_users">
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Age</th>
+			<th>City</th>
+			<th>Status</th>
+		</tr>
+		{% for user in users %}
+		<tr>
+			<td><a href="/accounts/profile/{{ user.username }}">{{ user.profile.name }}</a></td>
+			<td>{{ user.profile.date_of_birth|age }}</td>
+			<td>{{ user.profile.city }}</td>
+			<td>{{ user.profile.online|online }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+{% endblock %}

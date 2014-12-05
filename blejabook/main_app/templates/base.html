@@ -5,13 +5,19 @@
 <html lang="en">
 	<head>
 		<title>{% block title %}Date Site{% endblock %}</title>
-		<script type='text/javascript' src="{% static 'assets/js/jquery.js' %}"></script>
+		<link rel="stylesheet" type="text/css" href='{% static "assets/css/sitestyle.css" %}'>
+		<script type='text/javascript' src="{% static 'assets/js/jquery2.js' %}"></script>
 		<script type='text/javascript' src="{% static 'assets/js/default.js' %}"></script>
 	</head>
 
 	<body>
-	{% block header %}
-	{% endblock %}
+
+	<div class="header">
+		{% block header %}
+		<p><b>Logged in user: </b><a href="{% url 'user_profile' user.username %}">{{ user.profile.name }}</a></p>
+		<p><b>Number of online users: </b>{{ user.profile.num_of_online }}</p>
+		{% endblock %}
+	</div>
 
 	{% block content %}
 	{% endblock %}
