@@ -52,6 +52,7 @@ def edit_profile(request, username, permission=False):
 
 	return render(request, 'userprofile/edit_profile.html', {'form': form})
 
+@login_required
 def all_users(request):
 	"""
 	Funkcija ...

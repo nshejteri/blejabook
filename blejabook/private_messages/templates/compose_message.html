@@ -1,0 +1,49 @@
+
+		<form id="compose_message_form" method='post' class="form" role="form" action='{% url 'compose_message' username %}'>
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title" id="myModalLabel">Send message</h4>
+			</div>
+
+			<div class="modal-body"> 
+				{% csrf_token %} 
+				{{ message_form.non_field_errors }} 
+
+				<div class="form-group">
+					<div class="compose_message_form">
+						{{ message_form.recipient.errors }}
+						{{ message_form.recipient.label_tag }}
+						{{ message_form.recipient }}
+
+						{{ message_form.message_text.label_tag }}
+						{{ message_form.message_text }}
+						{{ message_form.message_text.errors }}
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-footer"> 
+				<input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Close" /> 
+				<input type="submit" class="btn btn-primary btn-sm" value="Send message" /> 
+			</div> 
+		</form>
+
+	<script> 
+		$("#compose_message_modal").on('hidden.bs.modal', function () {
+			$(this).data('bs.modal', null);
+		});
+
+		$("#compose_message_modal").on('shown.bs.modal', function() {
+  			$(this).find('[autofocus]').focus();
+		});
+		
+		var form_options = { 
+			target: '.modal-content', 
+			success: function() { 
+				
+			} 
+		} 
+		$('#compose_message_form').ajaxForm(form_options);
+	</script>
+
+

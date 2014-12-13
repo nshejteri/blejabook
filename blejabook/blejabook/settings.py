@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'main_app',
     'userprofile',
     'userauth',
+    'private_messages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -116,11 +117,13 @@ STATICFILES_DIRS = (
 TEMPLATE_MAIN_PATH = os.path.join(BASE_DIR, 'main_app/templates')
 TEMPLATE_PROFILE_PATH = os.path.join(BASE_DIR, 'userprofile/templates')
 TEMPLATE_AUTH_PATH = os.path.join(BASE_DIR, 'userauth/templates')
+TEMPLATE_MESSAGES_PATH = os.path.join(BASE_DIR, 'messages/templates')
 
 TEMPLATE_DIRS = [
     TEMPLATE_MAIN_PATH,
     TEMPLATE_PROFILE_PATH,
     TEMPLATE_AUTH_PATH,
+    TEMPLATE_MESSAGES_PATH,
 ]
 
 #AUTH_PROFILE_MODULE = 'userprofile.UserProfile'
@@ -137,8 +140,12 @@ DEFAULT_HTTP_PROTOCOL = 'http'
 
 SITE_ID = 1
 
-LOGIN_URL = '/account/login/'
+LOGIN_URL = 'index'
 
 # Interval od 20min za koji se korisnik smatra 'Online'. Ako se zakomentarise ova konstanta
 # default vrednost je 15min
 #ONLINE_TIMEOUT = 60 * 20
+
+
+#SESSION_COOKIE_AGE = 60 * 60
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
