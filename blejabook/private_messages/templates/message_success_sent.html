@@ -1,0 +1,31 @@
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+	<h4 class="modal-title" id="myModalLabel">Message info</h4>
+</div>
+
+<div class="modal-body">
+	<div class="alert alert-success" role="alert">Message successfully sent to {{ to_user.profile.name }}!</div>
+	<script> 
+		setTimeout(function() { 
+			jQuery('#compose_message_moda').modal('hide'); 
+		}, 1000);
+
+		$("#compose_message_modal").on('hidden.bs.modal', function () {
+			$(this).data('bs.modal', null);
+		});
+
+		var form_options = { 
+			target: '.modal-content', 
+			success: function() { 
+			} 
+		} 
+		$('#compose_message_form1').ajaxForm(form_options); 
+		
+	</script>
+</div>
+
+<div class="modal-footer">
+	<input type="button" class="btn btn-default btn-sm" data-dismiss="modal" value="Close" />
+</div>
+

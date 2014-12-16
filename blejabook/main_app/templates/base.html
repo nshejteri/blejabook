@@ -5,18 +5,54 @@
 <html lang="en">
 	<head>
 		<title>{% block title %}Date Site{% endblock %}</title>
-		<script type='text/javascript' src="{% static 'assets/js/jquery2.js' %}"></script>
-		<script type='text/javascript' src="{% static 'assets/js/default.js' %}"></script>
+		<link rel="stylesheet" type="text/css"  href="{% static 'assets/css/bootstrap.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'assets/css/sitestyle.css' %}">
+		<script type="text/javascript" src="{% static 'assets/js/jquery2.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/js/default.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/js/jquery.form.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'assets/js/bootstrap.min.js' %}"></script>
 	</head>
 
 	<body>
-	{% block header %}
-	{% endblock %}
+		<div id="wrap">
+			<div class="header">
+				{% block header %}
+				{% endblock %}
+			</div>
 
-	{% block content %}
-	{% endblock %}
+			<div class="site-navbar">
+				{% block navbar %}
+					<ul class="site-nav">
+						<li><a href="{% url 'index' %}">Home</a></li>
+						<li><a href="{% url 'user_profile' user.username %}">My profile</a></li>
+						<li><a href="">Friends</a></li>
+						<li><a href="{% url 'user_messages' %}">Messages</a></li>
+						<li><a href="">Gallery</a></li>
+					</ul>
+				{% endblock %}
+			</div>
 
-	{% block footer %}
-	{% endblock %}
+			<div class="sidebar">
+				{% block sidebar %}
+					<p><b>Logged user: </b><a href="{% url 'user_profile' user.username %}">{{ user.profile.name }}</a></p>
+					<ul>
+						<li><a href="{% url 'user_logout' %}">Logout</a></li>
+						<li><a href="{% url 'user_profile' user.username %}">Profil</a></li>
+						<li><a href="{% url 'all_users' %}">Svi korisnici</a></li>
+					</ul>
+					<p><b>Number of online users: </b>{{ user.profile.num_of_online }}</p>
+				{% endblock %}
+			</div>
+
+			<div class="content">
+				{% block content %}
+				{% endblock %}
+			</div>
+			
+			<div class="footer">
+				{% block footer %}
+				{% endblock %}
+			</div>
+		</div>
 	</body>
 </html>

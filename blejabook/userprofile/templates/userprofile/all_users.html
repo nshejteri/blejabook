@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load date_site_custom_tags %}
+{% load staticfiles %}
+
+{% block title %} All users {% endblock %}
+
+{% block content %}
+<div class="all_users">
+	<!-- Modal -->
+	<div class="modal fade" data-backdrop="static" id="compose_message_modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+			</div>
+		</div>
+	</div>
+	<!-- /.modal -->
+	<table id="hor-minimalist-b">
+		<thead>
+			<tr>
+				<th scope="col">Image</th>
+				<th scope="col">Name</th>
+				<th scope="col">Age</th>
+				<th scope="col">City</th>
+				<th scope="col">Status</th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+			<tr>
+				<td>Nema</td>
+				<td><a href="/accounts/profile/{{ user.username }}">{{ user.profile.name }}</a></td>
+				<td>{{ user.profile.date_of_birth|age }}</td>
+				<td>{{ user.profile.city }}</td>
+				<td>{{ user.profile.online|online }}</td>
+				<td><a class="fa fa-pencil" data-toggle="modal" href="{% url 'compose_message' user.username %}" data-target="#compose_message_modal" title="Send message" data-tooltip><img src="{% static 'assets/img/send_message_icon.png' %}" alt="Send message"></a></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock %}
+

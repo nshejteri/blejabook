@@ -27,7 +27,7 @@ def user_profile(request, username, permission=False):
 	"""
 	profil_owner = get_profil_owner(username)
 	profile = get_profile(username)
-	context = {'permision': permission, 'profile': profile, 'profil_owner': profil_owner}
+	context = {'permission': permission, 'profile': profile, 'profil_owner': profil_owner}
 
 	return render(request, 'userprofile/profile.html', context)
 
@@ -51,3 +51,11 @@ def edit_profile(request, username, permission=False):
 			form = UserProfileForm(instance=profile)
 
 	return render(request, 'userprofile/edit_profile.html', {'form': form})
+
+@login_required
+def all_users(request):
+	"""
+	Funkcija ...
+	"""
+	users = User.objects.exclude(id=request.user.id)
+	return render(request, 'userprofile/all_users.html', {'users': users})

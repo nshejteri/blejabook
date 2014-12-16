@@ -1,7 +1,3 @@
-{% extends 'base.html' %}
-
-{% block title %} Edit profile {% endblock %}
-
 {% block content %}
 	<form id='update_profile_frm' action="{% url 'edit_profile' user.username %}" method="POST">
 		{% csrf_token %}

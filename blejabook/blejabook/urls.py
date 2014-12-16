@@ -9,5 +9,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('main_app.urls')),
     url(r'^accounts/', include('userprofile.urls')),
-    url(r'^account/', include('userauth.urls'))
+    url(r'^account/', include('userauth.urls')),
+    url(r'^messages/', include('private_messages.urls'))
 )
