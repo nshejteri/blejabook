@@ -3,10 +3,11 @@
 {% block title %} Profile {% endblock %}
 
 {% block content %}
-	<div id='profile'>
-		<h2>Profil <span id='username'>{{ profil_owner.username }}</span></h2>
+	<h2>Profil <span id='username'>{{ profil_owner.username }}</span></h2>
 		<p>Username: {{ profil_owner.username }}</p>
 		<p>Email: {{ profil_owner.email }}</p>
+	<div id='profile'>
+		
 		
 		<h2>Licni podaci</h2>
 		<p>Name {{ profile.name }}</p>
