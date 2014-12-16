@@ -40,13 +40,13 @@ def edit_profile(request, username, permission=False):
 		return HttpResponse('kurcina')
 	else:
 		profile = get_profile(username)
-
+		url_redirection = '/accounts/profile/' + username + '/'
 		if request.method == 'POST':
 			form = UserProfileForm(request.POST, instance=profile)
 			
 			if form.is_valid():
 				form.save()
-				return HttpResponseRedirect('.')
+				return HttpResponseRedirect(url_redirection)
 		else:
 			form = UserProfileForm(instance=profile)
 

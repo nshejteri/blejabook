@@ -11,9 +11,12 @@ $(document).ready(function(){
 			data: {
 				'csrfmiddlewaretoken' : $('input[name=csrfmiddlewaretoken]').val()
 			},
-			success: searchSuccess,
 			dataType: 'html'
-		});
+		}).done( function(data, textStatus, jqXHR) {
+			$('#profile').html(data);
+      	}).fail(function() {
+        	alert("FAIL");
+      	});
 	});
 
 	$('#update_profile_frm').submit(function(event) {
@@ -25,8 +28,11 @@ $(document).ready(function(){
 			url: form.attr('action'),
 			data: form.serialize(),
 			dataType: 'html'	
-		}).done(function() {
-        	alert("DONE");
+		}).done( function(data, textStatus, jqXHR) {
+			$('#profile').html(data);
+        	///if (data.redirect) {
+            ///	window.location.href = data.redirect;
+       		///}
       	}).fail(function() {
         	alert("FAIL");
       	});
@@ -34,10 +40,7 @@ $(document).ready(function(){
 	});
 });
 
-function searchSuccess(data, textStatus, jqXHR)
-{
-	$('#profile').html(data);
-}
+
 
 
 
