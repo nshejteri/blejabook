@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %} Messages {% endblock %}
+
+{% block content %}
+	
+		<table id="hor-minimalist-b">
+			<tr>
+				<th>id</th>
+				<th>text</th>
+				<th>sender</th>
+				<th>recipient</th>
+				<th>sent at</th>
+				<th>parent</th>
+			</tr>
+			{% for msg in messages %}
+			<tr>
+				<td>{{ msg.pk }}</td>
+				<td>{{ msg.message_text }}</td>
+				<td>{{ msg.sender.pk }}</td>
+				<td>{{ msg.recipient.pk }}</td>
+				<td>{{ msg.sent_at|date:'d/m/Y H:i' }}</td>
+				<td>{{ msg.parent_msg.pk }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	
+{% endblock %}
