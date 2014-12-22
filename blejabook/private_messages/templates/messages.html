@@ -4,6 +4,28 @@
 
 {% block content %}
 	
+	<div class="list-group">
+		{% for msg in threads %}
+		<a href="{% url 'thread_messages' msg.id %}" class="list-group-item">
+			{% ifequal msg.sender.id request.user.id %}
+				<h4 class="list-group-item-heading" style="float:left">{{ msg.recipient.profile.name }}</h4>
+				<span style="float:right"> {{ msg.message_num }}</span>
+				<p class="list-group-item-text" style="clear:both">Me: {{ msg.message_text }}</p>
+				<span style="float:right">{{ msg.sent_at|date:'d/m/Y H:i:s' }}</span>
+				
+			{% else %}
+				<h4 class="list-group-item-heading" style="float:left">{{ msg.sender.profile.name }}</h4>
+				<span style="float:right">{{ msg.message_num }}</span>
+				<p class="list-group-item-text" style="clear:both">{{ msg.message_text }}</p>
+				<span style="float:right">{{ msg.sent_at|date:'d/m/Y H:i:s' }}</span>
+				
+			{% endifequal %}
+			<a href="{% url 'delete_thread' msg.id msg.last_msg_id %}">X</a>
+		</a>
+		{% endfor %}
+		
+	</div> 
+	
 		<table id="hor-minimalist-b">
 			<tr>
 				<th>id</th>
@@ -11,16 +33,18 @@
 				<th>sender</th>
 				<th>recipient</th>
 				<th>sent at</th>
-				<th>parent</th>
+				<th>Message num</th>
+				<th>Last msg id</th>
 			</tr>
-			{% for msg in messages %}
+			{% for msg in threads %}
 			<tr>
 				<td>{{ msg.pk }}</td>
 				<td>{{ msg.message_text }}</td>
 				<td>{{ msg.sender.pk }}</td>
 				<td>{{ msg.recipient.pk }}</td>
-				<td>{{ msg.sent_at|date:'d/m/Y H:i' }}</td>
-				<td>{{ msg.parent_msg.pk }}</td>
+				<td>{{ msg.sent_at|date:'d/m/Y H:i:s' }}</td>
+				<td>{{ msg.message_num }}</td>
+				<td>{{ msg.last_msg_id }}</td>
 			</tr>
 			{% endfor %}
 		</table>

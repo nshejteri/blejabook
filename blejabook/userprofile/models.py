@@ -55,6 +55,7 @@ class UserProfile(models.Model):
 	gender = models.CharField(max_length=1, choices=(('m', 'Male'), ('f', 'Female')))
 	country = models.CharField(max_length=30)
 	city = models.CharField(max_length=30)
+	#profile_image = models.FileField(upload_to='')
 	verified = models.BooleanField(default=False)
 	confirmation_key = models.CharField(max_length=60, default='')
 

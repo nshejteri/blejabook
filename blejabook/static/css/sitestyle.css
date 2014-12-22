@@ -133,3 +133,13 @@
 .modal-footer {
 	padding: 8px;
 }
+
+.list-group {
+	width: 330px;
+}
+
+.list-group-item {
+	overflow: auto;
+	margin-bottom: 5px;
+}
+

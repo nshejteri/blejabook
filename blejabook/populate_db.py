@@ -9,6 +9,7 @@ django.setup()
 from userprofile.models import UserProfile
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.contrib.auth.hashers import make_password
 
 def populate():
 
@@ -25,7 +26,7 @@ def populate():
 	add_profile(user5, 'User 5', datetime(1995, 05, 05, 0, 0), 'm', 'Srbija', 'Novi Sad', True, '1233456789123')
 
 def add_user(username, email, password):
-	user = User.objects.get_or_create(username=username, email=email, password=password)[0]
+	user = User.objects.get_or_create(username=username, email=email, password=make_password(password))[0]
 	return user
 
 def add_profile(user, name, date_of_birth, gender, country, city, verified, confirmation_key):

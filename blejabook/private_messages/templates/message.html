@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Message {% endblock %}
+
+{% block content %}
+
+	{% for m in thread_messages %}
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				{% ifequal m.sender.id request.user.id %}
+					<h3 class="panel-title">Me:</h3>
+				{% else %}
+					<h3 class="panel-title">{{ m.recipient.profile.name }}</h3>
+				{% endifequal %}
+				<span>{{ m.sent_at|date:'d/m/Y H:i:s' }}</span>
+			</div>
+
+			<div class="panel-body">
+			{{ m.message_text }}
+			</div>
+		</div>
+	{% endfor %}
+
+{% endblock %}

@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
-from private_messages.models import Message
+from private_messages.models import Msg
 
 class ComposeMessageForm(forms.ModelForm):
 	"""
@@ -11,7 +11,7 @@ class ComposeMessageForm(forms.ModelForm):
 	message_text = forms.CharField(label=_(u"Message text"), widget=forms.Textarea(attrs={'rows': '6', 'cols': '40', 'class': 'form-control', 'autofocus': 'autofocus', 'placeholder': 'Message text...'}))
 
 	class Meta:
-		model = Message
+		model = Msg
 		fields = ('message_text',)
 
 
