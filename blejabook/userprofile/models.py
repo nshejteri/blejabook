@@ -7,8 +7,16 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.core.cache import cache
+import os
+import uuid
 
 # Create your models here.
+def generate_new_filename(instance, filename):
+	"""
+	"""
+	f, ext = os.path.splitext(filename)
+	return "profile/%s_%s%s" % (instance.user.username, uuid.uuid4(), ext)
+
 class EmailConfirmationManager(models.Manager):
 
 	def send_confirmation(self, request, user):
@@ -55,7 +63,7 @@ class UserProfile(models.Model):
 	gender = models.CharField(max_length=1, choices=(('m', 'Male'), ('f', 'Female')))
 	country = models.CharField(max_length=30)
 	city = models.CharField(max_length=30)
-	#profile_image = models.FileField(upload_to='')
+	profile_image = models.ImageField('profile image', upload_to=generate_new_filename, default='', null=True, blank=True)
 	verified = models.BooleanField(default=False)
 	confirmation_key = models.CharField(max_length=60, default='')
 

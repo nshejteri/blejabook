@@ -4,14 +4,23 @@ from django.contrib.auth.models import User
 from userprofile.models import UserProfile
 from django.contrib.auth.decorators import login_required
 from userauth.forms import UserProfileForm
+from PIL import Image
+from os.path import join
+from django.conf import settings
 
 def profile_permission(func):
-	def wraper(request, username):
+	"""
+	Anotacija koja omogucava prikaz dodatnih opcija na profilu logovanog korisnika (sopstvenom)
+	dok na ostalim profilima korisnika onemogucuje prikaz dodatnih opcija.
+	"""
+	def wrapper(request, username):
 		if request.user == User.objects.get(username=username):
+
 			return func(request, username, permission=True)
 		else:
+
 			return func(request, username, permission=False)
-	return wraper
+	return wrapper
 
 def get_profile(username):
 	user = User.objects.get(username=username)
@@ -42,11 +51,23 @@ def edit_profile(request, username, permission=False):
 		profile = get_profile(username)
 		url_redirection = '/accounts/profile/' + username + '/'
 		if request.method == 'POST':
-			form = UserProfileForm(request.POST, instance=profile)
+			form = UserProfileForm(request.POST, request.FILES, instance=profile)
 			
 			if form.is_valid():
 				form.save()
+				
+				img_path = join(settings.MEDIA_ROOT, str(get_profile(username).profile_image))
+				print("PATH %s " % img_path)
+			
+				img = Image.open(img_path)
+				print("SIZE %s " % str(img.size))
+
+				img.thumbnail((160, 160))
+				img.save(img_path, 'JPEG')
+
 				return HttpResponseRedirect(url_redirection)
+			else:
+				return HttpResponse('VALIDACIJA PROBLEM')
 		else:
 			form = UserProfileForm(instance=profile)
 
